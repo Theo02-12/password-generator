@@ -9,11 +9,12 @@ body{
     align-items: center;
 }
 h1{
-    width: 400px;
+    width: 450px;
     height: 40px;
     border: 1px solid black;
     padding: 0px 20px;
     text-align: center;
+    margin-right: 15px;
 }
 button{
     padding: 10px;
@@ -27,4 +28,7 @@ h1, button{
 }
 div{
     display: flex;
+}
+select{
+    border-radius: 5px;
 }
