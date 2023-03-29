@@ -5,15 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 
 <body>
-    <div>
+    <div class="mdp">
         <button onclick="generate()">Générer un mdp</button>
         <h1 class="titre"></h1>
     </div>
+
+    <form class="login">
+        <i class="fa-solid fa-user"></i>
+        <label for="email" id="wrongEmail"></label>
+        <input type="email" id="email" placeholder="" name="email">
+
+        <label for="motDePasse" id="wrongPassword"></label>
+        <input type="password" placeholder="" id="motDePasse">
+        <button type="button" id="submitBtn">Se connecter</button>
+        <input type="number" name="nombre" placeholder="taille du mdp" id="nombre" min="15" max="30">
+    </form>
+
+
+
     <script src="app.js"></script>
 </body>
 

@@ -6,48 +6,70 @@ function generate() {
     for (let i = 0; i < passwordLenght; i++) {
         var random = Math.floor(Math.random() * element.length)
         password += element.substring(random, random + 1)
-
-
-        if (select.value == 25) {
-            passwordLenght = 25;
-        } else if (select.value == 15) {
-            passwordLenght = 15;
-        } else if (select.value == 20) {
-            passwordLenght = 20;
-        }
+        
+        passwordLenght = selectSizeMdp.value;
     }
-
-    const text = document.querySelector('.titre');
+    
+    var text = document.querySelector('.titre');
     text.innerHTML = password;
-    console.log(passwordLenght)
 }
 
+var selectSizeMdp = document.createElement('input')
+selectSizeMdp.type = 'number'
+selectSizeMdp.min = '15'
+selectSizeMdp.max = '25'
+
+Object.assign(selectSizeMdp.style,{
+    width: "40px",
+    height: "20px",
+    margin: "0",
+    
+});
+
+const container = document.querySelector('.mdp')
+
+
+
+container.appendChild(selectSizeMdp)
+
+fetch('http://localhost:1337/api/utilisateurs/?populate=*')
+    .then(res => res.json())
+    .then(user => {
+        user.data.forEach(element => {
+            console.log(element)
+            const username = element.attributes.name
+            const usermail = element.attributes.mail
+            const userPassword = element.attributes.password
+
+
+            const submitBtn = document.querySelector('#submitBtn');
+
+            submitBtn.addEventListener('click', submitForm);
+            function submitForm() {
+                const email = document.querySelector('#email').value;
+                const mdp_pass = document.querySelector('#motDePasse').value;
+                if (email == usermail) {
+                    console.log('mail ok')
+                } else if (mdp_pass == userPassword) {
+                    console.log('mdp ok')
+                }
+
+                /*              
+                              if (mdp_pass == userPassword) {
+                                  console.log('mdp ok')
+                              } else {
+                                  console.log('mdp non ok')
+                              }
+              */
+                if (email == usermail && (mdp_pass == userPassword)) {
+                    console.log(`Bienvenue ${username}`)
+                }
+            }
+        });
 
 
 
 
 
 
-
-const select = document.createElement('select')
-const option = document.createElement('option')
-const option2 = document.createElement('option')
-const option4 = document.createElement('option')
-const option3 = document.createElement('option')
-const container = document.querySelector('div')
-
-
-option.value = ""
-option.text = "Taille du mdp"
-
-option2.value = "15"
-option2.text = "15 caractères"
-
-option3.value = "25"
-option3.text = "25 caractères"
-
-option4.value = "20"
-option4.text = "20 caractère"
-
-select.append(option, option2, option4, option3)
-container.appendChild(select)
+    })
